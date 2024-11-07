@@ -6,7 +6,7 @@
 /*   By: go-donne <go-donne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 19:37:56 by go-donne          #+#    #+#             */
-/*   Updated: 2024/11/07 12:07:07 by go-donne         ###   ########.fr       */
+/*   Updated: 2024/11/07 12:21:35 by go-donne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,3 +63,48 @@ int	ft_printf*const char *format, ...)
 	va_end(arg_cursor);
 	return (chars_written);
 }
+
+
+// Notes
+
+Maybe use va_copy for memory safety & security
+e.g. if process_arg_cursor fails partway, original arg_cursor still valid, original va_list not corrupted
+
+State management
+State tracking needed
+e.g.:
+typedef struct s_format_state
+{
+	// core tracking
+	// current format specifier state
+	// security state
+}
+
+Will increment some TDD before moving on
+Can test:
+- basic char output
+- single format specifiers
+- number conversions
+
+
+
+
+# Key Questions to Consider
+
+**Error Handling**
+
+- How to handle partial writes?
+- What about system call failures?
+- Memory allocation failures?
+
+**Buffer Management**
+
+- Direct writing vs buffering?
+- Maximum output limits?
+- Performance trade-offs?
+
+**Security Considerations**
+
+- Format string vulnerabilities?
+- Buffer overflow prevention?
+- Resource exhaustion attacks?
