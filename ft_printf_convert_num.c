@@ -1,0 +1,62 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf_convert_num.c                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: go-donne <go-donne@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/08 09:30:45 by go-donne          #+#    #+#             */
+/*   Updated: 2024/11/08 11:01:01 by go-donne         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+static int	write_char_safely(char c)
+{
+	if (write(1, &c, 1) == -1)
+		return(-1);
+	return (1);
+}
+
+static int	write_string_safely(const char *str)
+{
+	int	len;
+
+	len = 0;
+	while (str[len])
+		len++;
+	if (write(1, str, len) == -1)
+		return (-1);
+	return (len);
+}
+
+static int	handle_negative(int *number)
+{
+	int	write_result;
+
+	write_result = write_char_safely('-');
+	if (write_result == -1)
+		return (-1);
+	*number = -(*number);
+	return (write_result);
+}
+
+static int	write_number_recursive(int n)
+{
+	int		write_result;
+	int		chars_written;
+	char	digit;
+
+	chars_written = 0;
+	if (n >= 10)
+	{
+		write_result = write_number_recursive(n / 10);
+		if (write_result == -1)
+			return (-1);
+		chars_written += write_result;
+	}
+	digit = (n % 10) + '0';
+	write_result = write_char_safely(digit);
+	if (write_result == -1)
+		return (-1);
+	return (chars_written + write_result);
+}
