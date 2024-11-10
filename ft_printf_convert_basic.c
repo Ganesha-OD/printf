@@ -1,26 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_convert.c                                :+:      :+:    :+:   */
+/*   ft_printf_convert_basic.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: go-donne <go-donne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 19:24:12 by go-donne          #+#    #+#             */
-/*   Updated: 2024/11/08 08:54:53 by go-donne         ###   ########.fr       */
+/*   Updated: 2024/11/10 12:26:00 by go-donne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int handle_<type>(va_list args)
-{
-    // 1. Extract & validate argument
-    // 2. Prepare conversion
-    // 3. Handle special cases
-    // 4. Perform output
-    // 5. Track & return bytes written
-}
-
-
-// Basic Handlers: chars. strings, % //
+// "Basic Handlers": characters, strings, % //
 
 int	handle_char(va_list args)
 {
