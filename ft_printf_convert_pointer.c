@@ -6,16 +6,9 @@
 /*   By: go-donne <go-donne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 12:23:02 by go-donne          #+#    #+#             */
-/*   Updated: 2024/11/10 12:34:40 by go-donne         ###   ########.fr       */
+/*   Updated: 2024/11/10 13:19:57 by go-donne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-static int	write_char_safely(char c)
-{
-	if (write(1, &c, 1) == -1)
-		return (-1);
-	return (1);
-}
 
 static const char	*get_hex_chars(void)
 {

@@ -6,16 +6,9 @@
 /*   By: go-donne <go-donne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 10:19:08 by go-donne          #+#    #+#             */
-/*   Updated: 2024/11/10 12:22:33 by go-donne         ###   ########.fr       */
+/*   Updated: 2024/11/10 13:20:02 by go-donne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-static int	write_char_safely(char c)
-{
-	if (write(1, &c, 1) == -1)
-		return (-1);
-	return (1);
-}
 
 static const char	*get_hex_chars(int uppercase)
 {
@@ -32,7 +25,7 @@ static int	write_hex_recursive(unsigned int value, int uppercase)
 
 	chars_written = 0;
 	hex_chars = get_hex_chars(uppercase);
-	if (value > 16)
+	if (value >= 16)
 	{
 		write_result = write_hex_recursive(value / 16, uppercase);
 		if (write_result == -1)

@@ -6,7 +6,7 @@
 /*   By: go-donne <go-donne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 19:24:12 by go-donne          #+#    #+#             */
-/*   Updated: 2024/11/10 12:26:00 by go-donne         ###   ########.fr       */
+/*   Updated: 2024/11/10 13:20:00 by go-donne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,22 +27,11 @@ int	handle_char(va_list args)
 int	handle_string(va_list args)
 {
 	char	*str;
-	int		chars_written;
-	int		result;
 
 	str = va_arg(args, char *);
-	chars_written = 0;
 	if (!str)
-		str = "(null)";
-	while (*str)
-	{
-		result = write(1, str, 1);
-		if (result == -1)
-			return (-1);
-		chars_written++;
-		str++;
-	}
-	return (chars_written);
+		return (write_string_safely("(null)"));
+	return (write_string_safely(str));
 }
 
 int	handle_percent(void)

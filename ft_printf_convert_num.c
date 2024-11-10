@@ -6,16 +6,9 @@
 /*   By: go-donne <go-donne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 09:30:45 by go-donne          #+#    #+#             */
-/*   Updated: 2024/11/08 11:07:55 by go-donne         ###   ########.fr       */
+/*   Updated: 2024/11/10 13:20:03 by go-donne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-static int	write_char_safely(char c)
-{
-	if (write(1, &c, 1) == -1)
-		return (-1);
-	return (1);
-}
 
 static int	write_string_safely(const char *str)
 {

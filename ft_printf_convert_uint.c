@@ -6,16 +6,9 @@
 /*   By: go-donne <go-donne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 11:08:40 by go-donne          #+#    #+#             */
-/*   Updated: 2024/11/08 13:27:38 by go-donne         ###   ########.fr       */
+/*   Updated: 2024/11/10 13:20:01 by go-donne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-static int	write_char_safely(char c)
-{
-	if (write(1, &c, 1) == -1)
-		return (-1);
-	return (1);
-}
 
 static int	write_uint_recursive(unsigned int n)
 {
