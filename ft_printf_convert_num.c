@@ -6,21 +6,9 @@
 /*   By: go-donne <go-donne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 09:30:45 by go-donne          #+#    #+#             */
-/*   Updated: 2024/11/10 13:20:03 by go-donne         ###   ########.fr       */
+/*   Updated: 2024/11/10 13:21:35 by go-donne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-static int	write_string_safely(const char *str)
-{
-	int	len;
-
-	len = 0;
-	while (str[len])
-		len++;
-	if (write(1, str, len) == -1)
-		return (-1);
-	return (len);
-}
 
 static int	handle_negative(int *number)
 {
