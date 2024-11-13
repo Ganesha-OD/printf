@@ -6,9 +6,11 @@
 /*   By: go-donne <go-donne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 12:46:06 by go-donne          #+#    #+#             */
-/*   Updated: 2024/11/10 13:21:32 by go-donne         ###   ########.fr       */
+/*   Updated: 2024/11/13 11:13:48 by go-donne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "ft_printf_utils.h"
 
 /* Basic I/O Safety Protocol */
 int	write_char_safely(char c)
@@ -41,6 +43,8 @@ static int	handle_format(char specifier, va_list args)
 		return (handle_char(args));
 	if (specifier == 's')
 		return (handle_string(args));
+	if (specifier == '%')
+		return (handle_percent(args));
 	if (specifier == 'p')
 		return (handle_pointer(args));
 	if (specifier == 'd' || specifier == 'i')
