@@ -6,7 +6,7 @@
 /*   By: go-donne <go-donne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 19:31:36 by go-donne          #+#    #+#             */
-/*   Updated: 2024/11/22 13:49:45 by go-donne         ###   ########.fr       */
+/*   Updated: 2024/11/22 14:27:20 by go-donne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,10 +110,8 @@ int	ft_printf(const char *format, ...)
 }
 
 // Mini Test Suite
-
 #include <stdio.h>
-
-
+// Helper: handles test organisation
 static void	test_printf(const char *test_name,
 							const char *format, ...)
 {
@@ -127,58 +125,38 @@ static void	test_printf(const char *test_name,
 	printf("Returns: ft_printf=%d, printf=%d\n", ft_ret, std_ret);
 }
 
-
+// Simple test cases with simple return value comparison
+// Test cases model: test_printf("", "\n");
 int	main(void)
 {
 	// Basic functionality
-	test_printf("Single conversion: digit", "019283\n");
-	test_printf("", "");
+	test_printf("Single conversion: digit", "0\n");
+	test_printf("Simple string", "Gruezi\n");
 
 	// Conversion-Specific Tests
-
+	test_printf("Unsigned", "019283\n");
+	// >> Pointer tests:
+	// >>>> Declarations: what's being pointed to:
+	int	number = 98; // simple static variable to point to
+	int	*ptr = &number; // pointer to this number
+	test_printf("Pointer", "?? what to input here?\n");
+	// Actual pointer tests:
+	test_printf("NULL pointer", "%p\n", NULL);
+	test_printf("Static pointer", "%p\n", ptr);
 
 	// Edge Cases
-
+	test_printf("INT_MAX", "INT_MAX\n");
+	test_printf("Empty string", "");
 
 	// Mixed Tests
-
+	Multiple conversions
+	Mixed with regular text
+	Sequential identical conversions
 
 	// Return Value Tests
+	Single conversion lengths
+    Multiple conversion lengths
+    Error conditions
 
 	return (0);
 }
-
-
-/*
-
-Test Categories:
-├── Basic Functionality
-│   ├── Single conversions
-│   ├── Simple strings
-│   └── Basic return values
-│
-├── Conversion-Specific Tests
-│   ├── Characters (%c)
-│   ├── Strings (%s)
-│   ├── Integers (%d, %i)
-│   ├── Unsigned (%u)
-│   ├── Hex (%x, %X)
-│   ├── Pointers (%p)
-│   └── Percent (%%)
-│
-├── Edge Cases
-│   ├── NULL values
-│   ├── INT_MIN/MAX
-│   ├── Empty strings
-│   └── Zero values
-│
-├── Mixed Tests
-│   ├── Multiple conversions
-│   ├── Mixed with regular text
-│   └── Sequential identical conversions
-│
-└── Return Value Tests
-    ├── Single conversion lengths
-    ├── Multiple conversion lengths
-    └── Error conditions
-*/
