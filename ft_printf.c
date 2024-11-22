@@ -6,7 +6,7 @@
 /*   By: go-donne <go-donne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 19:31:36 by go-donne          #+#    #+#             */
-/*   Updated: 2024/11/22 13:16:39 by go-donne         ###   ########.fr       */
+/*   Updated: 2024/11/22 13:49:45 by go-donne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,33 +109,47 @@ int	ft_printf(const char *format, ...)
 	return (result);
 }
 
-/* Mini Test Suite
+// Mini Test Suite
 
-(1) Overall structure:
-- Helper to print test results: print_test_result
-- Test runner (main function): calls each test. Tests are organised by category
-
-
-
-
-
-(2) Notes: next-level planning:
-
-
-// For printf:
 #include <stdio.h>
 
 
+static void	test_printf(const char *test_name,
+							const char *format, ...)
+{
+	int	ft_ret, std_ret;
 
-print_test_result
+	printf("\n☆☆☆ %s ☆☆☆\n", test_name);
 
-Required information:
-Test name: describes what's being tested
-Input
-my ft_printf implementation output
-expected standard printf actual output
+	ft_ret = ft_printf(format);
+	std_ret = printf(format);
+
+	printf("Returns: ft_printf=%d, printf=%d\n", ft_ret, std_ret);
+}
 
 
+int	main(void)
+{
+	// Basic functionality
+	test_printf("Single conversion: digit", "019283\n");
+	test_printf("", "");
+
+	// Conversion-Specific Tests
+
+
+	// Edge Cases
+
+
+	// Mixed Tests
+
+
+	// Return Value Tests
+
+	return (0);
+}
+
+
+/*
 
 Test Categories:
 ├── Basic Functionality
@@ -167,8 +181,4 @@ Test Categories:
     ├── Single conversion lengths
     ├── Multiple conversion lengths
     └── Error conditions
-
-
-NB:
-I'm not going to worry about having results compared or reporting results but will rely on manual comparison
 */
