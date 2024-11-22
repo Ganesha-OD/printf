@@ -6,7 +6,7 @@
 /*   By: go-donne <go-donne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 19:32:52 by go-donne          #+#    #+#             */
-/*   Updated: 2024/11/21 15:40:10 by go-donne         ###   ########.fr       */
+/*   Updated: 2024/11/22 12:34:16 by go-donne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,17 @@ int	write_string_safely(const char *str);
 
 /* Format specifier handlers
 Each handles a specific conversion: %c, %s, %p, %d, %i, %u, %x, %X, %% */
+// "Basic Handlers": characters, strings, % //
 int	handle_char(va_list args);
-int	handle_hex(va_list args, int uppercase);
-int	handle_integer(va_list args);
-int	handle_percent(void);
-int	handle_pointer(va_list args);
 int	handle_string(va_list args);
-int	handle_unsigned(va_list args);
+int	handle_percent(void);
 
-/* Hex utilities
-Handles both hex integers and pointer addresses */
-int	write_hex_recursive_long(unsigned long value, int uppercase);
+// Hexadecimal conversion handlers (integers and pointers) //
+int	handle_hex(va_list args, int uppercase);
+int	handle_pointer(va_list args);
+
+// Numeric handlers
+int	handle_integer(va_list args);
+int	handle_unsigned(va_list args);
 
 #endif

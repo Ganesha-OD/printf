@@ -6,7 +6,7 @@
 /*   By: go-donne <go-donne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 09:30:45 by go-donne          #+#    #+#             */
-/*   Updated: 2024/11/21 15:40:12 by go-donne         ###   ########.fr       */
+/*   Updated: 2024/11/22 12:14:58 by go-donne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,11 @@ static int	handle_negative(int *number)
 	return (write_result);
 }
 
-static int	write_number_recursive(int n)
+/* Generic recursive number writer for both signed and unsigned
+ * @param n: The number to convert and write
+ * @return: Number of characters written, or -1 on error
+*/
+static int	write_decimal_recursive(unsigned long n)
 {
 	int		write_result;
 	int		chars_written;
@@ -32,7 +36,7 @@ static int	write_number_recursive(int n)
 	chars_written = 0;
 	if (n >= 10)
 	{
-		write_result = write_number_recursive(n / 10);
+		write_result = write_decimal_recursive(n / 10);
 		if (write_result == -1)
 			return (-1);
 		chars_written += write_result;
@@ -61,8 +65,16 @@ int	handle_integer(va_list args)
 			return (-1);
 		chars_written += write_result;
 	}
-	write_result = write_number_recursive(number);
+	write_result = write_decimal_recursive((unsigned long)number);
 	if (write_result == -1)
 		return (-1);
 	return (chars_written + write_result);
+}
+
+int	handle_unsigned(va_list args)
+{
+	unsigned int	number;
+
+	number = va_arg(args, unsigned int);
+	return (write_decimal_recursive((unsigned long)number));
 }
