@@ -6,7 +6,7 @@
 /*   By: go-donne <go-donne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 19:31:36 by go-donne          #+#    #+#             */
-/*   Updated: 2024/11/21 15:03:09 by go-donne         ###   ########.fr       */
+/*   Updated: 2024/11/22 13:16:39 by go-donne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,3 +108,67 @@ int	ft_printf(const char *format, ...)
 	va_end(arg_backup);
 	return (result);
 }
+
+/* Mini Test Suite
+
+(1) Overall structure:
+- Helper to print test results: print_test_result
+- Test runner (main function): calls each test. Tests are organised by category
+
+
+
+
+
+(2) Notes: next-level planning:
+
+
+// For printf:
+#include <stdio.h>
+
+
+
+print_test_result
+
+Required information:
+Test name: describes what's being tested
+Input
+my ft_printf implementation output
+expected standard printf actual output
+
+
+
+Test Categories:
+├── Basic Functionality
+│   ├── Single conversions
+│   ├── Simple strings
+│   └── Basic return values
+│
+├── Conversion-Specific Tests
+│   ├── Characters (%c)
+│   ├── Strings (%s)
+│   ├── Integers (%d, %i)
+│   ├── Unsigned (%u)
+│   ├── Hex (%x, %X)
+│   ├── Pointers (%p)
+│   └── Percent (%%)
+│
+├── Edge Cases
+│   ├── NULL values
+│   ├── INT_MIN/MAX
+│   ├── Empty strings
+│   └── Zero values
+│
+├── Mixed Tests
+│   ├── Multiple conversions
+│   ├── Mixed with regular text
+│   └── Sequential identical conversions
+│
+└── Return Value Tests
+    ├── Single conversion lengths
+    ├── Multiple conversion lengths
+    └── Error conditions
+
+
+NB:
+I'm not going to worry about having results compared or reporting results but will rely on manual comparison
+*/
