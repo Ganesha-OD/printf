@@ -6,14 +6,14 @@
 #    By: go-donne <go-donne@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/07 18:36:38 by go-donne          #+#    #+#              #
-#    Updated: 2024/11/22 12:37:35 by go-donne         ###   ########.fr        #
+#    Updated: 2024/11/23 10:41:01 by go-donne         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libftprintf.a
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
-HEADER = ft_printf.h ft_printf_utils.h
+HEADER = ft_printf.h
 
 # Source files grouped by functionality
 SRCS = ft_printf.c \

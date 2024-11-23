@@ -6,7 +6,7 @@
 /*   By: go-donne <go-donne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 19:31:36 by go-donne          #+#    #+#             */
-/*   Updated: 2024/11/22 14:27:20 by go-donne         ###   ########.fr       */
+/*   Updated: 2024/11/23 10:03:43 by go-donne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,18 +109,33 @@ int	ft_printf(const char *format, ...)
 	return (result);
 }
 
-// Mini Test Suite
+/*
+// MINI TEST SUITE //
+// INCOMPLETE: NEED TO UPDATE WITH vprintf //
+
 #include <stdio.h>
+
 // Helper: handles test organisation
 static void	test_printf(const char *test_name,
-							const char *format, ...)
+							const char *format,
+							...) // declare variadic args here
 {
 	int	ft_ret, std_ret;
+	va_list	args; // to handle variable arguments
+	va_list	args_copy; // need this 2nd one because calling printf twice
+
+	// Initialise va_list
+	va_start(args, format);
+	va_start(args_copy, args); // copy for the 2nd printf
 
 	printf("\n☆☆☆ %s ☆☆☆\n", test_name);
-
+	// Call both prints functions with their arguments
 	ft_ret = ft_printf(format);
 	std_ret = printf(format);
+
+	// Clean up
+	va_end(args);
+	va_end(args_copy);
 
 	printf("Returns: ft_printf=%d, printf=%d\n", ft_ret, std_ret);
 }
@@ -135,12 +150,9 @@ int	main(void)
 
 	// Conversion-Specific Tests
 	test_printf("Unsigned", "019283\n");
-	// >> Pointer tests:
-	// >>>> Declarations: what's being pointed to:
+	// 		Pointer tests:
 	int	number = 98; // simple static variable to point to
 	int	*ptr = &number; // pointer to this number
-	test_printf("Pointer", "?? what to input here?\n");
-	// Actual pointer tests:
 	test_printf("NULL pointer", "%p\n", NULL);
 	test_printf("Static pointer", "%p\n", ptr);
 
@@ -149,14 +161,16 @@ int	main(void)
 	test_printf("Empty string", "");
 
 	// Mixed Tests
-	Multiple conversions
-	Mixed with regular text
-	Sequential identical conversions
+	test_printf("Mixed format", "Text: %s, Number: %d\n", "Hello", 42);
+	test_printf("Multiple conversions: sequential identical",
+				"%s %s %s\n" "Heilbronn", "Heiliger Brunnen", "Schwabenland");
 
 	// Return Value Tests
-	Single conversion lengths
-    Multiple conversion lengths
-    Error conditions
+	// Should return 2 (digit + newline)
+	test_printf("Single length", "%d\n", 5);
+	// Returns length of entire output
+	test_printf("Multiple lengths", "%s %d\n", "Test", 42);
 
 	return (0);
 }
+ */

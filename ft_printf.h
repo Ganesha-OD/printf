@@ -6,7 +6,7 @@
 /*   By: go-donne <go-donne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 19:32:52 by go-donne          #+#    #+#             */
-/*   Updated: 2024/11/22 12:34:16 by go-donne         ###   ########.fr       */
+/*   Updated: 2024/11/23 10:11:12 by go-donne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 # define FT_PRINTF_H
 
 /* System includes */
-/* va_list, va_start, va_arg, va_end, va_copy */
+// va_list, va_start, va_arg, va_end, va_copy
 # include <stdarg.h>
-/* write */
+// write
 # include <unistd.h>
-/* INT_MIN */
+// INT_MIN
 # include <limits.h>
 
 /* Core printf function */

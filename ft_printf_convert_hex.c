@@ -6,13 +6,13 @@
 /*   By: go-donne <go-donne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 11:06:07 by go-donne          #+#    #+#             */
-/*   Updated: 2024/11/22 11:35:44 by go-donne         ###   ########.fr       */
+/*   Updated: 2024/11/23 10:07:11 by go-donne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 /* Hexadecimal Conversion Helpers
- * Functions for converting numbers to hexadecimal representation
+ * Convert numbers to hexadecimal representation
  * Used by %x, %X (integers) and %p (pointers) conversions
  */
 /* get_hex_chars: creates string of hex digits for conversion
@@ -36,10 +36,6 @@ static const char	*get_hex_chars(int uppercase)
  * @param value      Number to convert (handles full unsigned long range)
  * @param uppercase  0 for lowercase (0-9a-f), 1 for uppercase (0-9A-F)
  * @return          Number of characters written, or -1 on error
- *
- * Example:
- * value=255, uppercase=0 -> writes "ff", returns 2
- * value=0, uppercase=1 -> writes "0", returns 1
  */
 static int	write_hex_recursive_long(unsigned long value, int uppercase)
 {
@@ -63,7 +59,6 @@ static int	write_hex_recursive_long(unsigned long value, int uppercase)
 }
 
 /* Hexadecimal conversion handlers (integers and pointers) */
-
 int	handle_hex(va_list args, int uppercase)
 {
 	unsigned int	number;
