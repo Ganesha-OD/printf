@@ -6,7 +6,7 @@
 /*   By: go-donne <go-donne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 19:31:36 by go-donne          #+#    #+#             */
-/*   Updated: 2024/11/23 10:03:43 by go-donne         ###   ########.fr       */
+/*   Updated: 2024/11/23 15:11:17 by go-donne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,68 +109,161 @@ int	ft_printf(const char *format, ...)
 	return (result);
 }
 
-/*
+
 // MINI TEST SUITE //
-// INCOMPLETE: NEED TO UPDATE WITH vprintf //
 
 #include <stdio.h>
+#include <stdarg.h>
 
-// Helper: handles test organisation
-static void	test_printf(const char *test_name,
-							const char *format,
-							...) // declare variadic args here
+// Helper: handles test organisation & properly handles variadic arguments
+static void test_printf(const char *test_name, const char *format, ...)
 {
-	int	ft_ret, std_ret;
-	va_list	args; // to handle variable arguments
-	va_list	args_copy; // need this 2nd one because calling printf twice
+    va_list args1, args2;
+    int ft_ret, std_ret;
 
-	// Initialise va_list
-	va_start(args, format);
-	va_start(args_copy, args); // copy for the 2nd printf
+    printf("\n=== %s ===\n", test_name);
 
-	printf("\n☆☆☆ %s ☆☆☆\n", test_name);
-	// Call both prints functions with their arguments
-	ft_ret = ft_printf(format);
-	std_ret = printf(format);
+    // Initialize first set of arguments
+    va_start(args1, format);
+    // Make a copy for the second printf
+    va_copy(args2, args1);
 
-	// Clean up
-	va_end(args);
-	va_end(args_copy);
+    // Print test header
+    printf("Format: \"%s\"\n", format);
+    printf("Output:\n");
 
-	printf("Returns: ft_printf=%d, printf=%d\n", ft_ret, std_ret);
+    // Run both printf versions
+    printf("ft_printf  > ");
+    ft_ret = vprintf(format, args1);
+    printf("\nprintf     > ");
+    std_ret = vprintf(format, args2);
+    printf("\n");
+
+    // Compare return values
+    printf("Returns: ft=%d, std=%d %s\n",
+           ft_ret, std_ret,
+           (ft_ret == std_ret) ? "✓" : "✗");
+
+    // Cleanup
+    va_end(args1);
+    va_end(args2);
 }
 
+
 // Simple test cases with simple return value comparison
-// Test cases model: test_printf("", "\n");
-int	main(void)
+int main(void)
 {
-	// Basic functionality
-	test_printf("Single conversion: digit", "0\n");
-	test_printf("Simple string", "Gruezi\n");
+    char *str = "Hello";
+    void *ptr = &str;
 
-	// Conversion-Specific Tests
-	test_printf("Unsigned", "019283\n");
-	// 		Pointer tests:
-	int	number = 98; // simple static variable to point to
-	int	*ptr = &number; // pointer to this number
-	test_printf("NULL pointer", "%p\n", NULL);
-	test_printf("Static pointer", "%p\n", ptr);
+    // Basic Tests
+    test_printf("Simple String", "Basic text\n");
+    test_printf("Character", "Char: %c\n", 'A');
+    test_printf("String", "String: %s\n", str);
+    test_printf("Pointer", "Pointer: %p\n", ptr);
+    test_printf("Integer", "Number: %d\n", 42);
+    test_printf("Unsigned", "Unsigned: %u\n", 4294967295U);
+    test_printf("Hexadecimal", "Hex: %x %X\n", 255, 255);
+    test_printf("Percent", "%%\n");
 
-	// Edge Cases
-	test_printf("INT_MAX", "INT_MAX\n");
-	test_printf("Empty string", "");
+    // Edge Cases
+    test_printf("NULL String", "Null str: %s\n", NULL);
+    test_printf("NULL Pointer", "Null ptr: %p\n", NULL);
+    test_printf("INT_MIN", "Min int: %d\n", INT_MIN);
+    test_printf("INT_MAX", "Max int: %d\n", INT_MAX);
 
-	// Mixed Tests
-	test_printf("Mixed format", "Text: %s, Number: %d\n", "Hello", 42);
-	test_printf("Multiple conversions: sequential identical",
-				"%s %s %s\n" "Heilbronn", "Heiliger Brunnen", "Schwabenland");
+    // Mixed Tests
+    test_printf("Multiple Types",
+                "Mix: %c %s %p %d %i %u %x %X %%\n",
+                'Z', "test", ptr, -42, 42, 42U, 42, 42);
 
-	// Return Value Tests
-	// Should return 2 (digit + newline)
-	test_printf("Single length", "%d\n", 5);
-	// Returns length of entire output
-	test_printf("Multiple lengths", "%s %d\n", "Test", 42);
+    return (0);
+}
 
-	return (0);
+
+/*
+// Basic printf tests: (separate from above test suite)
+//
+// Quick visual comparison:
+// - between ft_printf and printf outputs
+// - and that return values match
+
+#include <stdio.h>
+#include <limits.h>
+
+int main(void)
+{
+    int ft_ret, std_ret;
+    char c = 'A';
+    char *str = "Hello World";
+    int num = 42;
+    void *ptr = &num;
+    unsigned int uint = 4294967295;
+
+    printf("\n=== Basic Functionality Tests ===\n");
+
+    // Test 1: Basic string
+    printf("\nTest 1 - Basic string:\n");
+    ft_ret = ft_printf("This is a test\n");
+    std_ret = printf("This is a test\n");
+    printf("Returns: ft=%d, std=%d\n", ft_ret, std_ret);
+
+    // Test 2: Character (%c)
+    printf("\nTest 2 - Character:\n");
+    ft_ret = ft_printf("Character: %c\n", c);
+    std_ret = printf("Character: %c\n", c);
+    printf("Returns: ft=%d, std=%d\n", ft_ret, std_ret);
+
+    // Test 3: String (%s)
+    printf("\nTest 3 - String:\n");
+    ft_ret = ft_printf("String: %s\n", str);
+    std_ret = printf("String: %s\n", str);
+    printf("Returns: ft=%d, std=%d\n", ft_ret, std_ret);
+
+    // Test 4: Pointer (%p)
+    printf("\nTest 4 - Pointer:\n");
+    ft_ret = ft_printf("Pointer: %p\n", ptr);
+    std_ret = printf("Pointer: %p\n", ptr);
+    printf("Returns: ft=%d, std=%d\n", ft_ret, std_ret);
+
+    // Test 5: Integer (%d/%i)
+    printf("\nTest 5 - Integer:\n");
+    ft_ret = ft_printf("Integer (d): %d, (i): %i\n", num, num);
+    std_ret = printf("Integer (d): %d, (i): %i\n", num, num);
+    printf("Returns: ft=%d, std=%d\n", ft_ret, std_ret);
+
+    // Test 6: Unsigned (%u)
+    printf("\nTest 6 - Unsigned:\n");
+    ft_ret = ft_printf("Unsigned: %u\n", uint);
+    std_ret = printf("Unsigned: %u\n", uint);
+    printf("Returns: ft=%d, std=%d\n", ft_ret, std_ret);
+
+    // Test 7: Hexadecimal (%x/%X)
+    printf("\nTest 7 - Hexadecimal:\n");
+    ft_ret = ft_printf("Hex (lower): %x, (upper): %X\n", num, num);
+    std_ret = printf("Hex (lower): %x, (upper): %X\n", num, num);
+    printf("Returns: ft=%d, std=%d\n", ft_ret, std_ret);
+
+    // Test 8: Percent sign (%%")
+    printf("\nTest 8 - Percent sign:\n");
+    ft_ret = ft_printf("Percent: %%\n");
+    std_ret = printf("Percent: %%\n");
+    printf("Returns: ft=%d, std=%d\n", ft_ret, std_ret);
+
+    // Test 9: Edge Cases
+    printf("\nTest 9 - Edge Cases:\n");
+    ft_ret = ft_printf("NULL string: %s\n", NULL);
+    std_ret = printf("NULL string: %s\n", NULL);
+    printf("Returns: ft=%d, std=%d\n", ft_ret, std_ret);
+
+    ft_ret = ft_printf("NULL pointer: %p\n", NULL);
+    std_ret = printf("NULL pointer: %p\n", NULL);
+    printf("Returns: ft=%d, std=%d\n", ft_ret, std_ret);
+
+    ft_ret = ft_printf("INT_MIN: %d\n", INT_MIN);
+    std_ret = printf("INT_MIN: %d\n", INT_MIN);
+    printf("Returns: ft=%d, std=%d\n", ft_ret, std_ret);
+
+    return (0);
 }
  */
