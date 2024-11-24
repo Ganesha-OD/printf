@@ -6,7 +6,7 @@
 /*   By: go-donne <go-donne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 19:31:36 by go-donne          #+#    #+#             */
-/*   Updated: 2024/11/24 10:41:04 by go-donne         ###   ########.fr       */
+/*   Updated: 2024/11/24 10:48:34 by go-donne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,7 @@ int	ft_printf(const char *format, ...)
 }
 
 
+/*
 // MINI TEST SUITE //
 
 #include <stdio.h>
@@ -150,7 +151,7 @@ static void test_printf(const char *test_name, const char *format, ...)
 }
 
 
-/* // Simple test cases with simple return value comparison
+ // Simple test cases with simple return value comparison
 int main(void)
 {
     char *str = "Hello";
