@@ -6,7 +6,7 @@
 /*   By: go-donne <go-donne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 19:31:36 by go-donne          #+#    #+#             */
-/*   Updated: 2024/11/23 15:11:17 by go-donne         ###   ########.fr       */
+/*   Updated: 2024/11/24 10:41:04 by go-donne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,7 +150,7 @@ static void test_printf(const char *test_name, const char *format, ...)
 }
 
 
-// Simple test cases with simple return value comparison
+/* // Simple test cases with simple return value comparison
 int main(void)
 {
     char *str = "Hello";
@@ -178,7 +178,7 @@ int main(void)
                 'Z', "test", ptr, -42, 42, 42U, 42, 42);
 
     return (0);
-}
+} */
 
 
 /*
